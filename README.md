@@ -1,3 +1,4 @@
+[![Build Status](https://jenkins.catsandcoding.be/job/Parkshark%20-%20South%20Park/badge/icon)](https://jenkins.catsandcoding.be/job/Parkshark%20-%20South%20Park/)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=svendp1988_parkshark&metric=alert_status)](https://sonarcloud.io/dashboard/index/svendp1988_parkshark)
 
 # ParkShark
