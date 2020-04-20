@@ -57,6 +57,10 @@ public class Person {
         return contactData;
     }
 
+    public void setContactData(List<ContactData> contactData) {
+        this.contactData = contactData;
+    }
+
     @Override
     public String toString() {
         return "Person{" +

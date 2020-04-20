@@ -8,7 +8,15 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import south.park.parkshark.ParksharkApplication;
+import south.park.parkshark.entities.Member;
+import south.park.parkshark.entities.MembershipLevels;
+import south.park.parkshark.entities.Person;
+
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @AutoConfigureTestDatabase
@@ -25,6 +33,16 @@ public class MemberRepositoryTest {
 
     @Test
     public void weExist(){
-        Assertions.assertThat(memberRepository).isNotNull();
+        assertThat(memberRepository).isNotNull();
+    }
+
+    @Test
+    @Sql({"defaultAddress.sql", "createMemberDependencies.sql"})
+    public void createMember() {
+        Person person = new Person(1l, null, null, null, null);
+        Member member = new Member(1l, person, MembershipLevels.BRONZE, LocalDate.now());
+        memberRepository.save(member);
+
+        assertThat(memberRepository.findById(1l)).isNotEmpty().hasValue(member);
     }
 }

@@ -11,5 +11,11 @@
 
     <artifactId>domain</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>south.park</groupId>
+            <artifactId>datastore</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
