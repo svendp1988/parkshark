@@ -5,44 +5,45 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "members")
-public class members {
+public class Members {
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
-    @Column(name = "person_id")
-    private long personId;
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
     @Enumerated(EnumType.STRING)
-    private MembershipLevel membershipLevel;
-    @Column(name = "registration_id")
-    LocalDate registrationId;
+    private MembershipLevels membershipLevel;
+    @Column(name = "registration_date")
+    LocalDate registrationDate;
 
-    public members() {
+    public Members() {
     }
 
     public long getMemberId() {
         return memberId;
     }
 
-    public long getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public MembershipLevel getMembershipLevel() {
+    public MembershipLevels getMembershipLevel() {
         return membershipLevel;
     }
 
-    public LocalDate getRegistrationId() {
-        return registrationId;
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
     }
 
     @Override
     public String toString() {
         return "members{" +
                 "memberId=" + memberId +
-                ", personId=" + personId +
+                ", personId=" + person +
                 ", membershipLevel=" + membershipLevel +
-                ", registrationId=" + registrationId +
+                ", registrationId=" + registrationDate +
                 '}';
     }
 }

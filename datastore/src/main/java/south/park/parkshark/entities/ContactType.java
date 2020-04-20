@@ -6,11 +6,12 @@ import javax.persistence.*;
 @Table(name = "contact_type")
 public class ContactType {
     @Id
+    @Column(name = "contact_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contactTypeId;
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
-    private ContactTypes contact_type;
+    private ContactTypes contactType;
 
     public ContactType() {
     }
@@ -19,7 +20,7 @@ public class ContactType {
         return contactTypeId;
     }
 
-    public ContactTypes getContact_type() {
-        return contact_type;
+    public ContactTypes getContactType() {
+        return contactType;
     }
 }
