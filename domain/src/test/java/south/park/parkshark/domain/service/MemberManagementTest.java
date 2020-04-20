@@ -3,25 +3,17 @@ package south.park.parkshark.domain.service;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import south.park.parkshark.domain.dto.shared.ContactDataDto;
 import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.response.MemberDto;
 import south.park.parkshark.domain.dto.shared.LicensePlateDto;
 import south.park.parkshark.entities.*;
-import south.park.parkshark.repositories.AddressRepository;
-import south.park.parkshark.repositories.LicensePlateRepository;
-import south.park.parkshark.repositories.MemberRepository;
-import south.park.parkshark.repositories.PersonRepository;
+import south.park.parkshark.repositories.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class MemberManagementTest {
@@ -32,10 +24,11 @@ class MemberManagementTest {
     private AddressRepository addressRepository = Mockito.mock(AddressRepository.class);
     private PersonRepository personRepository = Mockito.mock(PersonRepository.class);
     private LicensePlateRepository licensePlateRepository = Mockito.mock(LicensePlateRepository.class);
+    private ContactDataRepository contactDataRepository = Mockito.mock(ContactDataRepository.class);
 
     public MemberManagementTest() {
         this.memberManagement = new MemberManagement(memberRepository, addressRepository, personRepository,
-                licensePlateRepository, memberMapper);
+                licensePlateRepository, contactDataRepository , memberMapper);
     }
 
     @Test

@@ -6,10 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.response.MemberDto;
 import south.park.parkshark.entities.*;
-import south.park.parkshark.repositories.AddressRepository;
-import south.park.parkshark.repositories.LicensePlateRepository;
-import south.park.parkshark.repositories.MemberRepository;
-import south.park.parkshark.repositories.PersonRepository;
+import south.park.parkshark.repositories.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,17 +19,19 @@ public class MemberManagement {
     private final AddressRepository addressRepository;
     private final PersonRepository personRepository;
     private final LicensePlateRepository licensePlateRepository;
+    private final ContactDataRepository contactDataRepository;
     private final MemberMapper memberMapper;
 
     @Autowired
     public MemberManagement(MemberRepository memberRepository, AddressRepository addressRepository,
                             PersonRepository personRepository , LicensePlateRepository licensePlateRepository,
-                            MemberMapper memberMapper) {
+                            ContactDataRepository contactDataRepository, MemberMapper memberMapper) {
         this.memberRepository = memberRepository;
         this.addressRepository = addressRepository;
         this.personRepository = personRepository;
         this.licensePlateRepository = licensePlateRepository;
         this.memberMapper = memberMapper;
+        this.contactDataRepository = contactDataRepository;
     }
 
     public MemberDto registerMember(CreateMemberDto input){
@@ -59,6 +58,7 @@ public class MemberManagement {
         List<ContactData> contactData = input.getContactData().stream()
                 .map(cd -> memberMapper.toContactData(cd, person.getPersonId()))
                 .collect(Collectors.toList());
+        contactDataRepository.saveAll(contactData);
         person.setContactData(contactData);
         return person;
     }

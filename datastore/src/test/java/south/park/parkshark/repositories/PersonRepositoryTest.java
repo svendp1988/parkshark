@@ -55,6 +55,7 @@ public class PersonRepositoryTest {
 
         person = personRepository.save(person);
         contactDataRepository.saveAll(contactData);
+
         person.setContactData(contactData);
         Person actual = personRepository.findById(1L).get();
 
