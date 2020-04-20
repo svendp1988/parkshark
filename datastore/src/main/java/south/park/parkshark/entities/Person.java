@@ -1,5 +1,6 @@
 package south.park.parkshark.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,16 +9,20 @@ import javax.persistence.Table;
 @Table(name = "persons")
 public class Person {
     @Id
-    private long id;
+    @Column(name = "person_id")
+    private long personId;
+    @Column(name = "address_id")
     private long addressId;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
 
     public Person() {
     }
 
-    public long getId() {
-        return id;
+    public long getPersonId() {
+        return personId;
     }
 
     public long getAddressId() {
@@ -35,7 +40,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + personId +
                 ", addressId=" + addressId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
