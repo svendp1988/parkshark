@@ -11,5 +11,12 @@
 
     <artifactId>datastore</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>south.park</groupId>
+            <artifactId>war</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

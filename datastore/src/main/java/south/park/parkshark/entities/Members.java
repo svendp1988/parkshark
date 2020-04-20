@@ -10,6 +10,8 @@ public class Members {
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
+
+    /*
     @OneToOne
     @JoinColumn(name = "person_id")
     private Person person;
@@ -46,4 +48,6 @@ public class Members {
                 ", registrationId=" + registrationDate +
                 '}';
     }
+
+     */
 }
