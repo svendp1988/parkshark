@@ -2,6 +2,8 @@ package south.park.parkshark.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,14 +21,30 @@ public class Member {
     @Column(name = "registration_date")
     LocalDate registrationDate;
 
+    @OneToMany
+    @JoinTable(name = "member_plates",
+    joinColumns = {@JoinColumn(name = "member_id")},
+    inverseJoinColumns = {@JoinColumn(name = "license_plate_id")})
+    List<LicensePlate> licensePlates = new ArrayList<>();
+
     public Member() {
     }
 
-    public Member(long memberId, Person person, MembershipLevels membershipLevel, LocalDate registrationDate) {
+    public Member(Person person, MembershipLevels membershipLevel, LocalDate registrationDate,
+                  List<LicensePlate> licensePlates){
+        this.person = person;
+        this.membershipLevel = membershipLevel;
+        this.registrationDate = registrationDate;
+        this.licensePlates = licensePlates;
+    }
+
+    public Member(long memberId, Person person, MembershipLevels membershipLevel, LocalDate registrationDate,
+                  List<LicensePlate> licensePlates) {
         this.memberId = memberId;
         this.person = person;
         this.membershipLevel = membershipLevel;
         this.registrationDate = registrationDate;
+        this.licensePlates = licensePlates;
     }
 
     public long getMemberId() {
@@ -43,6 +61,10 @@ public class Member {
 
     public LocalDate getRegistrationDate() {
         return registrationDate;
+    }
+
+    public List<LicensePlate> getLicensePlates() {
+        return licensePlates;
     }
 
     @Override

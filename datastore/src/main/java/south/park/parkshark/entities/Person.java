@@ -28,6 +28,11 @@ public class Person {
 
     public Person() {
     }
+    public Person(Address address, String firstName, String lastName){
+        this.address = address;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Person(Long personId, Address address, String firstName, String lastName, List<ContactData> contactData){
         this.personId = personId;

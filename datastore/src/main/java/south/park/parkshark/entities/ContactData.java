@@ -20,6 +20,11 @@ public class ContactData {
     public ContactData() {
     }
 
+    public ContactData(long personId, ContactTypes contactType, String data){
+        this.personId = personId;
+        this.contactType = contactType;
+        this.data = data;
+    }
     public ContactData(long contactDataId, long personId, ContactTypes contactType, String data){
 
         this.contactDataId = contactDataId;

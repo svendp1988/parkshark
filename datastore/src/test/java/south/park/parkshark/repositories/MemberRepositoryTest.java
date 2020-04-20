@@ -15,6 +15,7 @@ import south.park.parkshark.entities.MembershipLevels;
 import south.park.parkshark.entities.Person;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,7 +41,7 @@ public class MemberRepositoryTest {
     @Sql({"defaultAddress.sql", "createMemberDependencies.sql"})
     public void createMember() {
         Person person = new Person(1l, null, null, null, null);
-        Member member = new Member(1l, person, MembershipLevels.BRONZE, LocalDate.now());
+        Member member = new Member(1l, person, MembershipLevels.BRONZE, LocalDate.now(), List.of());
         memberRepository.save(member);
 
         assertThat(memberRepository.findById(1l)).isNotEmpty().hasValue(member);
