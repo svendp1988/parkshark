@@ -1,0 +1,1 @@
+INSERT INTO contact_types (id, name) VALUES (1, 'MOBILEPHONE'), (2, 'FIXEDPHONE'), (3, 'EMAIL');
