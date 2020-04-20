@@ -20,6 +20,13 @@ public class Address {
 
     public Address() {
     }
+    public Address(long addressId, String streetName, String streetNumber, String postalCode, String postalLabel){
+        this.addressId = addressId;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.postalCode = postalCode;
+        this.postalLabel = postalLabel;
+    }
 
     public long getAddressId() {
         return addressId;

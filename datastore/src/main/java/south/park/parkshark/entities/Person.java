@@ -11,18 +11,30 @@ public class Person {
     @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long personId;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @OneToMany
     @JoinColumn(name = "person_id")
-    private List<ContactData> contactDataList = new ArrayList<>();
+    private List<ContactData> contactData = new ArrayList<>();
 
     public Person() {
+    }
+
+    public Person(Long personId, Address address, String firstName, String lastName, List<ContactData> contactData){
+        this.personId = personId;
+        this.address = address;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactData = contactData;
     }
 
     public long getPersonId() {
@@ -42,7 +54,11 @@ public class Person {
     }
 
     public List<ContactData> getContactDataList() {
-        return contactDataList;
+        return contactData;
+    }
+
+    public void setContactData(List<ContactData> contactData) {
+        this.contactData = contactData;
     }
 
     @Override
@@ -52,7 +68,22 @@ public class Person {
                 ", addressId=" + address +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", contact list = " + contactDataList +
+                ", contact list = " + contactData +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        return personId == person.personId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (personId ^ (personId >>> 32));
     }
 }

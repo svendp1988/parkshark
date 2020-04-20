@@ -2,10 +2,11 @@ package south.park.parkshark.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "members")
-public class Members {
+public class Member {
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,14 @@ public class Members {
     @Column(name = "registration_date")
     LocalDate registrationDate;
 
-    public Members() {
+    public Member() {
+    }
+
+    public Member(long memberId, Person person, MembershipLevels membershipLevel, LocalDate registrationDate) {
+        this.memberId = memberId;
+        this.person = person;
+        this.membershipLevel = membershipLevel;
+        this.registrationDate = registrationDate;
     }
 
     public long getMemberId() {
@@ -45,5 +53,18 @@ public class Members {
                 ", membershipLevel=" + membershipLevel +
                 ", registrationId=" + registrationDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return memberId == member.memberId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberId);
     }
 }

@@ -3,7 +3,7 @@ package south.park.parkshark.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "membership_level")
+@Table(name = "membership_levels")
 public class MembershipLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
