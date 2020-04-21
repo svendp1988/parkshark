@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
-import south.park.parkshark.ParksharkApplication;
 import south.park.parkshark.entities.Address;
 import south.park.parkshark.entities.ContactData;
 import south.park.parkshark.entities.ContactTypes;
@@ -20,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @DataJpaTest
 @AutoConfigureTestDatabase
-@ContextConfiguration(classes = {ParksharkApplication.class})
+@ComponentScan(basePackages = "south.park.parkshark")
 public class PersonRepositoryTest {
     private final PersonRepository personRepository;
     private final ContactDataRepository contactDataRepository;
