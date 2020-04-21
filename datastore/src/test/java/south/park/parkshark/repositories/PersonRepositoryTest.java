@@ -48,16 +48,18 @@ public class PersonRepositoryTest {
     @Test
     @Sql("defaultAddress.sql")
     public void personCanHaveContactData() {
-        List<ContactData> contactData = List.of(
-                new ContactData(1,1L, ContactTypes.EMAIL,"bob@thebobsons.com"));
         Address address = new Address(1,"here street","33", "1000", "Bruxelles");
         Person person = new Person(1L,address,"Bob","Bobson", List.of());
 
         person = personRepository.save(person);
+        long personId = person.getPersonId();
+
+        List<ContactData> contactData = List.of(
+                new ContactData(1,personId, ContactTypes.EMAIL,"bob@thebobsons.com"));
         contactDataRepository.saveAll(contactData);
 
         person.setContactData(contactData);
-        Person actual = personRepository.findById(1L).get();
+        Person actual = personRepository.findById(personId).get();
 
         assertThat(actual.getContactDataList()).hasSameElementsAs(contactData);
     }
