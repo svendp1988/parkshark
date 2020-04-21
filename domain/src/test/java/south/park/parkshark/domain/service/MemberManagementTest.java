@@ -11,6 +11,7 @@ import south.park.parkshark.domain.dto.response.MemberDto;
 import south.park.parkshark.domain.dto.shared.LicensePlateDto;
 import south.park.parkshark.entities.*;
 import south.park.parkshark.repositories.*;
+import south.park.parkshark.domain.exceptions.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +30,49 @@ class MemberManagementTest {
     public MemberManagementTest() {
         this.memberManagement = new MemberManagement(memberRepository, addressRepository, personRepository,
                 licensePlateRepository, contactDataRepository , memberMapper);
+    }
+
+    @Test
+    void registerAsMember_withoutAnEmail_thenThrow(){
+        List<ContactDataDto> contactDataDto = List.of(
+                new ContactDataDto(ContactTypes.FIXEDPHONE,"039544554"),
+                new ContactDataDto(ContactTypes.MOBILEPHONE,"048459498985"));
+        LicensePlateDto licensePlateDto = new LicensePlateDto("A1-123-234", "KR");
+        CreateMemberDto input = new CreateMemberDto("Bob","Bobson","some street","1","1000",
+                "Bruxelles", contactDataDto, MembershipLevels.GOLD, licensePlateDto);
+
+        Assertions.assertThatExceptionOfType(LackingEmailAddressException.class)
+                .isThrownBy(() -> memberManagement.registerMember(input));
+    }
+
+    @Test
+    void registerAsMember_withoutAValidEmail_thenThrow(){
+
+        List<ContactDataDto> contactDataDto = List.of(
+                new ContactDataDto(ContactTypes.EMAIL,"bob@bobson"),
+                new ContactDataDto(ContactTypes.FIXEDPHONE,"039544554"),
+                new ContactDataDto(ContactTypes.MOBILEPHONE,"048459498985")
+        );
+        LicensePlateDto licensePlateDto = new LicensePlateDto("A1-123-234", "KR");
+        CreateMemberDto input = new CreateMemberDto("Bob","Bobson","some street","1","1000",
+                "Bruxelles", contactDataDto, MembershipLevels.GOLD, licensePlateDto);
+
+        Assertions.assertThatExceptionOfType(InvalidEmailException.class)
+                .isThrownBy(() -> memberManagement.registerMember(input));
+    }
+    @Test
+    void registerAsMember_withoutValidPhoneNumber_thenThrow(){
+
+        List<ContactDataDto> contactDataDto = List.of(
+                new ContactDataDto(ContactTypes.EMAIL,"bob@bobson.com")
+                );
+        LicensePlateDto licensePlateDto = new LicensePlateDto("A1-123-234", "KR");
+        LocalDate registrationDate = LocalDate.now();
+        CreateMemberDto input = new CreateMemberDto("Bob","Bobson","some street","1","1000",
+                "Bruxelles", contactDataDto, MembershipLevels.GOLD, licensePlateDto);
+
+        Assertions.assertThatExceptionOfType(LackingPhoneNumberException.class)
+                .isThrownBy(() -> memberManagement.registerMember(input));
     }
 
     @Test
@@ -60,12 +104,6 @@ class MemberManagementTest {
 
         Member member = new Member(1L, person,input.getMembershipLevel(), registrationDate, List.of(licensePlate));
         Mockito.when(memberRepository.save(Mockito.any(Member.class))).thenReturn(member);
-
-        // Given
-
-        // When
-
-        // Then
 
         MemberDto actual = memberManagement.registerMember(input);
         Assertions.assertThat(actual).isEqualTo(expected);

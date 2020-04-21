@@ -1,4 +1,4 @@
-package south.park.parkshark;
+package south.park.parkshark.repositories;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
