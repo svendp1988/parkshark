@@ -23,4 +23,6 @@ public class MemberController {
     public MemberDto registerAsMember(@RequestBody CreateMemberDto input){
         return memberManagement.registerMember(input);
     }
+
+
 }
