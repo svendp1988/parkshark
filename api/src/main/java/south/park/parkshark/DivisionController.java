@@ -29,6 +29,12 @@ public class DivisionController {
         return divisionService.createDivision(createDivisionDto);
     }
 
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<DivisionDto> getAllDivisions() {
+        return divisionService.getAllDivisions();
+    }
+
 
 
 
