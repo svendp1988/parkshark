@@ -1,6 +1,7 @@
 package south.park.parkshark;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -9,7 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import south.park.parkshark.domain.dto.request.CreateDivisionDto;
 import south.park.parkshark.domain.dto.response.DivisionDto;
 import south.park.parkshark.domain.service.DivisionService;
+import south.park.parkshark.entities.Division;
 import south.park.parkshark.mappers.DivisionMapper;
+import south.park.parkshark.repositories.DivisionRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,14 +27,27 @@ class DivisionServiceTest {
 
     @Autowired
     DivisionService divisionService;
+    @Autowired
+    DivisionMapper divisionMapper;
 
     @Test
     void Create_Division() {
-        CreateDivisionDto divisionToTest = new CreateDivisionDto("dev1", "cegeka", "driesb");
-        DivisionDto divisionDto = divisionService.createDivision(divisionToTest);
+
+        DivisionRepository divisionRepository = Mockito.mock(DivisionRepository.class);
+        DivisionService divisionService = new DivisionService(divisionRepository, new DivisionMapper());
+
+        Division division = new Division("dev1", "cegeka", "driesb");
+        DivisionDto divisionDto = divisionMapper.toDivisionDto(division);
+        Mockito.when(divisionRepository.findAll()).thenReturn(List.of(division));
         Iterable<DivisionDto> actual = divisionService.getAllDivisions();
 
         assertThat( actual).contains(divisionDto);
+
+//        CreateDivisionDto divisionToTest = new CreateDivisionDto("dev1", "cegeka", "driesb");
+//        DivisionDto divisionDto = divisionService.createDivision(divisionToTest);
+//        Iterable<DivisionDto> actual = divisionService.getAllDivisions();
+//
+//        assertThat( actual).contains(divisionDto);
     }
 
     @Test
