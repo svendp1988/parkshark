@@ -1,10 +1,8 @@
 package south.park.parkshark;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.response.MemberDto;
 import south.park.parkshark.domain.service.MemberManagement;
@@ -20,9 +18,13 @@ public class MemberController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public MemberDto registerAsMember(@RequestBody CreateMemberDto input){
         return memberManagement.registerMember(input);
     }
 
-
+    @GetMapping
+    public MemberDto getException() {
+        throw new RuntimeException("standaard get");
+    }
 }
