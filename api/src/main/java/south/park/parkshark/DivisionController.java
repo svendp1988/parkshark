@@ -7,6 +7,8 @@ import south.park.parkshark.domain.dto.request.CreateDivisionDto;
 import south.park.parkshark.domain.dto.response.DivisionDto;
 import south.park.parkshark.domain.service.DivisionService;
 
+import java.util.Collection;
+
 
 @RestController
 @RequestMapping(path = "/divisions")
@@ -26,6 +28,8 @@ public class DivisionController {
     public DivisionDto createDivision(@RequestBody CreateDivisionDto createDivisionDto) {
         return divisionService.createDivision(createDivisionDto);
     }
+
+
 
 
 }
