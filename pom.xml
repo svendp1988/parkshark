@@ -174,7 +174,7 @@
                 <sonar.sources>pom.xml,src/main,${project.build.directory}/generated-sources/annotations</sonar.sources>
                 <sonar.cpd.exclusions>\*\*/generated-sources/\*\*/*.java</sonar.cpd.exclusions>
                 <sonar.scm.exclusions.disabled>true</sonar.scm.exclusions.disabled>
-                <sonar.projectKey>svendp1988_parkshark</sonar.projectKey>
+                <!-- <sonar.projectKey>svendp1988_parkshark</sonar.projectKey> -->
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.organization>svendp1988</sonar.organization>
             </properties>

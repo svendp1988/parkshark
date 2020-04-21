@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Coverage by sonarcloud.io') {
             steps {
-                sh ' mvn clean verify -P sonar -Dsonar.login=$SONAR_CLOUD_PARKSHARK_TOKEN'
+                sh ' mvn clean verify -P sonar -Dsonar.projectKey=svendp1988_parkshark -Dsonar.login=$SONAR_CLOUD_PARKSHARK_TOKEN'
             }
         }
     }
