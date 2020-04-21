@@ -10,8 +10,5 @@ import java.util.List;
 public interface DivisionRepository extends CrudRepository<Division, Long> {
 
     @Override
-    <S extends Division> S save(S s);
-
-    @Override
     List<Division> findAll();
 }

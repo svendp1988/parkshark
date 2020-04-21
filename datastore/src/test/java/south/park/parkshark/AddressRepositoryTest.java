@@ -1,19 +1,24 @@
-package south.park.parkshark.repositories;
+package south.park.parkshark;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
-import south.park.parkshark.ParksharkApplication;
 import south.park.parkshark.entities.Address;
+import south.park.parkshark.repositories.AddressRepository;
 
 
-@AutoConfigureTestDatabase
+//@AutoConfigureTestDatabase
 @DataJpaTest
-@ContextConfiguration(classes = {ParksharkApplication.class})
+//@ComponentScan(basePackages = "south.park.parkshark")
+//@SpringBootTest(classes = AddressRepository.class)
+//@ContextConfiguration
 public class AddressRepositoryTest {
+
     private final AddressRepository addressRepository;
 
     @Autowired

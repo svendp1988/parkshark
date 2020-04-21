@@ -1,15 +1,11 @@
 package south.park.parkshark.repositories;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
-import south.park.parkshark.ParksharkApplication;
 import south.park.parkshark.entities.Member;
 import south.park.parkshark.entities.MembershipLevels;
 import south.park.parkshark.entities.Person;
@@ -22,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @AutoConfigureTestDatabase
 @DataJpaTest
-@ContextConfiguration(classes = {ParksharkApplication.class})
+@ComponentScan(basePackages = "south.park.parkshark")
 public class MemberRepositoryTest {
 
     private final MemberRepository memberRepository;
