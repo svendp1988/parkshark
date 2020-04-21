@@ -1,4 +1,4 @@
-package south.park.parkshark.dtos;
+package south.park.parkshark.domain.dto.response;
 
 import java.util.Objects;
 

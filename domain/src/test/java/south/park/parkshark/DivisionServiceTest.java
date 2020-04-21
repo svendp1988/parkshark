@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
-import south.park.parkshark.dtos.CreateDivisionDto;
-import south.park.parkshark.dtos.DivisionDto;
-import south.park.parkshark.entities.Division;
+import south.park.parkshark.domain.dto.request.CreateDivisionDto;
+import south.park.parkshark.domain.dto.response.DivisionDto;
+import south.park.parkshark.domain.service.DivisionService;
 import south.park.parkshark.mappers.DivisionMapper;
 
 import java.util.Collection;

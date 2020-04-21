@@ -1,8 +1,8 @@
 package south.park.parkshark.mappers;
 
 import org.springframework.stereotype.Component;
-import south.park.parkshark.dtos.CreateDivisionDto;
-import south.park.parkshark.dtos.DivisionDto;
+import south.park.parkshark.domain.dto.request.CreateDivisionDto;
+import south.park.parkshark.domain.dto.response.DivisionDto;
 import south.park.parkshark.entities.Division;
 
 import java.util.Collection;

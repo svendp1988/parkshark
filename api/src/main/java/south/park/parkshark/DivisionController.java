@@ -3,8 +3,9 @@ package south.park.parkshark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import south.park.parkshark.dtos.CreateDivisionDto;
-import south.park.parkshark.dtos.DivisionDto;
+import south.park.parkshark.domain.dto.request.CreateDivisionDto;
+import south.park.parkshark.domain.dto.response.DivisionDto;
+import south.park.parkshark.domain.service.DivisionService;
 
 
 @RestController

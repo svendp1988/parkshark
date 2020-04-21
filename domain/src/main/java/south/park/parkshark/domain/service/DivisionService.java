@@ -1,10 +1,10 @@
-package south.park.parkshark;
+package south.park.parkshark.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import south.park.parkshark.dtos.CreateDivisionDto;
-import south.park.parkshark.dtos.DivisionDto;
+import south.park.parkshark.domain.dto.request.CreateDivisionDto;
+import south.park.parkshark.domain.dto.response.DivisionDto;
 import south.park.parkshark.entities.Division;
 import south.park.parkshark.mappers.DivisionMapper;
 import south.park.parkshark.repositories.DivisionRepository;
