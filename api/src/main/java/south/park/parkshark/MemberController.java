@@ -7,6 +7,8 @@ import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.response.MemberDto;
 import south.park.parkshark.domain.service.MemberManagement;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/member", consumes = "application/json;charset=UTF-8", produces = "application/json;charset=UTF-8")
 public class MemberController {
@@ -24,7 +26,8 @@ public class MemberController {
     }
 
     @GetMapping
-    public MemberDto getException() {
-        throw new RuntimeException("standaard get");
+    @ResponseStatus(HttpStatus.OK)
+    public List<MemberDto> findAll() {
+        return memberManagement.findAll();
     }
 }

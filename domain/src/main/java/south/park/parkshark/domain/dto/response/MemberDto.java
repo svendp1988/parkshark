@@ -8,21 +8,24 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class MemberDto {
-    private final long memberId;
-    private final String firstName;
-    private final String lastName;
-    private final String streetName;
-    private final String streetNumber;
-    private final String postalCode;
-    private final String postalLabel;
-    private final List<ContactDataDto> contactData;
-    private final MembershipLevels membershipLevel;
-    private final List<LicensePlateDto> licensePlate;
-    private final LocalDate registrationDate;
+    private long memberId;
+    private String firstName;
+    private String lastName;
+    private String streetName;
+    private String streetNumber;
+    private String postalCode;
+    private String postalLabel;
+    private List<ContactDataDto> contactData;
+    private MembershipLevels membershipLevel;
+    private List<LicensePlateDto> licensePlate;
+    private LocalDate registrationDate;
+
+    public MemberDto() {
+    }
 
     public MemberDto(long memberId, String firstName, String lastName, String streetName, String streetNumber, String postalCode,
                      String postalLabel, List<ContactDataDto> contactData, MembershipLevels membershipLevel,
-                     List<LicensePlateDto> licensePlate, LocalDate registrationDate){
+                     List<LicensePlateDto> licensePlate, LocalDate registrationDate) {
 
         this.memberId = memberId;
         this.firstName = firstName;

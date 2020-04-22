@@ -22,6 +22,10 @@ public class MemberMapper {
                 toLicensePlateDto(member.getLicensePlates()), member.getRegistrationDate());
     }
 
+    public List<MemberDto> toMemberDto(List<Member> inputList){
+        return inputList.stream().map(this::toMemberDto).collect(Collectors.toList());
+    }
+
     public Member toMember(CreateMemberDto createMemberDto) {
         return new Member();
     }

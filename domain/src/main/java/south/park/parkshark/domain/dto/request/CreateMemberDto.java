@@ -7,15 +7,18 @@ import south.park.parkshark.entities.MembershipLevels;
 import java.util.List;
 
 public class CreateMemberDto {
-    private final String firstName;
-    private final String lastName;
-    private final String streetName;
-    private final String streetNumber;
-    private final String postalCode;
-    private final String postalLabel;
-    private final List<ContactDataDto> contactData;
-    private final MembershipLevels membershipLevel;
-    private final LicensePlateDto licensePlate;
+    private String firstName;
+    private String lastName;
+    private String streetName;
+    private String streetNumber;
+    private String postalCode;
+    private String postalLabel;
+    private List<ContactDataDto> contactData;
+    private MembershipLevels membershipLevel;
+    private LicensePlateDto licensePlate;
+
+    public CreateMemberDto() {
+    }
 
     public CreateMemberDto(String firstName, String lastName, String streetName, String streetNumber,
                            String postalCode, String postalLabel, List<ContactDataDto> contactData,

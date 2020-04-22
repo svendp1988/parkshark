@@ -95,4 +95,7 @@ public class MemberManagement {
         return address;
     }
 
+    public List<MemberDto> findAll() {
+       return memberMapper.toMemberDto(memberRepository.findAll()) ;
+    }
 }

@@ -6,10 +6,13 @@ import south.park.parkshark.entities.ContactTypes;
 import java.util.Objects;
 
 public class ContactDataDto {
-    private final ContactTypes type;
-    private final String data;
+    private ContactTypes type;
+    private String data;
 
-    public ContactDataDto(ContactTypes type, String data){
+    public ContactDataDto() {
+    }
+
+    public ContactDataDto(ContactTypes type, String data) {
         this.type = type;
         this.data = data;
     }

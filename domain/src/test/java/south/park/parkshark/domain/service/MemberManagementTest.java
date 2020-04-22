@@ -17,16 +17,21 @@ import south.park.parkshark.domain.exceptions.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class MemberManagementTest {
     private MemberManagement memberManagement;
     private MemberMapper memberMapper = new MemberMapper();
 
-    private MemberRepository memberRepository = Mockito.mock(MemberRepository.class);
-    private AddressRepository addressRepository = Mockito.mock(AddressRepository.class);
-    private PersonRepository personRepository = Mockito.mock(PersonRepository.class);
-    private LicensePlateRepository licensePlateRepository = Mockito.mock(LicensePlateRepository.class);
-    private ContactDataRepository contactDataRepository = Mockito.mock(ContactDataRepository.class);
+    private MemberRepository memberRepository = mock(MemberRepository.class);
+    private AddressRepository addressRepository = mock(AddressRepository.class);
+    private PersonRepository personRepository = mock(PersonRepository.class);
+    private LicensePlateRepository licensePlateRepository = mock(LicensePlateRepository.class);
+    private ContactDataRepository contactDataRepository = mock(ContactDataRepository.class);
 
     public MemberManagementTest() {
         this.memberManagement = new MemberManagement(memberRepository, addressRepository, personRepository,
@@ -42,7 +47,7 @@ class MemberManagementTest {
         CreateMemberDto input = new CreateMemberDto("Bob","Bobson","some street","1","1000",
                 "Bruxelles", contactDataDto, MembershipLevels.GOLD, licensePlateDto);
 
-        Assertions.assertThatExceptionOfType(LackingEmailAddressException.class)
+        assertThatExceptionOfType(LackingEmailAddressException.class)
                 .isThrownBy(() -> memberManagement.registerMember(input));
     }
 
@@ -58,7 +63,7 @@ class MemberManagementTest {
         CreateMemberDto input = new CreateMemberDto("Bob","Bobson","some street","1","1000",
                 "Bruxelles", contactDataDto, MembershipLevels.GOLD, licensePlateDto);
 
-        Assertions.assertThatExceptionOfType(InvalidEmailException.class)
+        assertThatExceptionOfType(InvalidEmailException.class)
                 .isThrownBy(() -> memberManagement.registerMember(input));
     }
     @Test
@@ -72,7 +77,7 @@ class MemberManagementTest {
         CreateMemberDto input = new CreateMemberDto("Bob","Bobson","some street","1","1000",
                 "Bruxelles", contactDataDto, MembershipLevels.GOLD, licensePlateDto);
 
-        Assertions.assertThatExceptionOfType(LackingPhoneNumberException.class)
+        assertThatExceptionOfType(LackingPhoneNumberException.class)
                 .isThrownBy(() -> memberManagement.registerMember(input));
     }
 
@@ -89,7 +94,7 @@ class MemberManagementTest {
                 "1000", "Bruxelles",contactDataDto,MembershipLevels.GOLD,List.of(licensePlateDto), registrationDate);
 
         Address address = new Address(1L,"some street", "1", "1000", "Bruxelles");
-        Mockito.when(addressRepository.save(Mockito.any(Address.class))).thenReturn(address);
+        when(addressRepository.save(any(Address.class))).thenReturn(address);
 
         List<ContactData> contactData = List.of(
                 new ContactData(1L, 1L, ContactTypes.EMAIL, "bob@bobson.com"),
@@ -98,15 +103,32 @@ class MemberManagementTest {
         );
 
         Person person = new Person(1L,address, "Bob", "Bobson", contactData);
-        Mockito.when(personRepository.save(Mockito.any(Person.class))).thenReturn(person);
+        when(personRepository.save(any(Person.class))).thenReturn(person);
 
         LicensePlate licensePlate = new LicensePlate(1L,"A1-123-234", "KR");
-        Mockito.when(licensePlateRepository.save(Mockito.any(LicensePlate.class))).thenReturn(licensePlate);
+        when(licensePlateRepository.save(any(LicensePlate.class))).thenReturn(licensePlate);
 
         Member member = new Member(1L, person,input.getMembershipLevel(), registrationDate, List.of(licensePlate));
-        Mockito.when(memberRepository.save(Mockito.any(Member.class))).thenReturn(member);
+        when(memberRepository.save(any(Member.class))).thenReturn(member);
 
         MemberDto actual = memberManagement.registerMember(input);
-        Assertions.assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(expected);
     }
+    @Test
+    void getAllMembers_returnsList(){
+
+        List<ContactData> contactData = List.of(
+                new ContactData(1L, 1L, ContactTypes.EMAIL, "bob@bobson.com"),
+                new ContactData(2L, 1L, ContactTypes.FIXEDPHONE, "039544554"),
+                new ContactData(3L, 1L, ContactTypes.MOBILEPHONE, "048459498985")
+        );
+        Address address = new Address(1L,"some street", "1", "1000", "Bruxelles");
+        Person person = new Person(1L,address, "Bob", "Bobson", contactData);
+        LicensePlate licensePlate = new LicensePlate(1L,"A1-123-234", "KR");
+        Member member = new Member(1L, person, MembershipLevels.GOLD, LocalDate.now(), List.of(licensePlate));
+        List<Member> allMembers = List.of(member);
+        when(memberRepository.findAll()).thenReturn(allMembers);
+        assertThat(memberManagement.findAll()).contains(memberMapper.toMemberDto(member));
+    }
+
 }
