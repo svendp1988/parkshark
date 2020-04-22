@@ -1,4 +1,5 @@
 -- CREATE schema parkshark;
+-- Set schema parkshark;
 CREATE TABLE parkshark.divisions (
                                      division_id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
                                      "name" text NOT NULL,

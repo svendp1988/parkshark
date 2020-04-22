@@ -10,6 +10,7 @@ import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.response.MemberDto;
 import south.park.parkshark.domain.dto.shared.LicensePlateDto;
 import south.park.parkshark.entities.*;
+import south.park.parkshark.mappers.MemberMapper;
 import south.park.parkshark.repositories.*;
 import south.park.parkshark.domain.exceptions.*;
 
