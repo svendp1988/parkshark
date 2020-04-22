@@ -9,7 +9,7 @@ public class MembershipLevel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "membership_level_id")
     private int membershipLevelId;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private MembershipLevels membershipLevel;
 
