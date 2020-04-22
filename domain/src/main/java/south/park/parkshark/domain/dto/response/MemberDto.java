@@ -96,4 +96,48 @@ public class MemberDto {
                 ", registrationDate=" + registrationDate +
                 '}';
     }
+
+    public long getMemberId() {
+        return memberId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public String getPostalLabel() {
+        return postalLabel;
+    }
+
+    public List<ContactDataDto> getContactData() {
+        return contactData;
+    }
+
+    public MembershipLevels getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public List<LicensePlateDto> getLicensePlate() {
+        return licensePlate;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
 }
