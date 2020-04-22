@@ -21,4 +21,6 @@ public class ParkingLotController {
     public ParkingLotDto createParkingLot(@RequestBody CreateParkingLotDto createParkingLotDto) {
         return parkingLotService.createParkingLot(createParkingLotDto);
     }
+
+
 }
