@@ -1,4 +1,4 @@
-package south.park.parkshark.domain.service;
+package south.park.parkshark.mappers;
 
 import org.springframework.stereotype.Service;
 import south.park.parkshark.domain.dto.request.CreateMemberDto;
