@@ -11,6 +11,7 @@ import south.park.parkshark.domain.dto.request.CreateParkingLotDto;
 import south.park.parkshark.domain.dto.response.ParkingLotDto;
 import south.park.parkshark.domain.exceptions.InvalidEmailException;
 import south.park.parkshark.domain.exceptions.LackingEmailAddressException;
+import south.park.parkshark.domain.exceptions.LackingPhoneNumberException;
 import south.park.parkshark.domain.service.ParkingLotService;
 import south.park.parkshark.domain.service.ValidationService;
 import south.park.parkshark.entities.*;
@@ -79,6 +80,22 @@ class ParkingLotServiceTest {
             CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto("kerkstraatparking", 200, 1,
                     new Person(address, "dries", "bodaer",
                             List.of( new ContactData(1, ContactTypes.FIXEDPHONE, "013624896"))),
+                    new Address(), new Division(), new ParkingCategory("underground"));
+
+            parkingLotService.createParkingLot(createParkingLotDto);
+        });
+    }
+
+    @Test
+    void lacking_Phonenumber_throws_lackinPhonenumberexeption() {
+
+        Address address = new Address("kerkstraat", "2", "3560", "lummen");
+
+        org.assertj.core.api.Assertions.assertThatExceptionOfType(LackingPhoneNumberException.class).isThrownBy(() ->
+        {
+            CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto("kerkstraatparking", 200, 1,
+                    new Person(address, "dries", "bodaer",
+                            List.of( new ContactData(1, ContactTypes.EMAIL, "test@gmail.com"))),
                     new Address(), new Division(), new ParkingCategory("underground"));
 
             parkingLotService.createParkingLot(createParkingLotDto);
