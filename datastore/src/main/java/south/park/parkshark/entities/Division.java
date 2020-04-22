@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "divisions")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Division {
     @Id
     @Column(name = "division_id")

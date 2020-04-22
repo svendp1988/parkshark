@@ -3,10 +3,13 @@ package south.park.parkshark.domain.dto.shared;
 import java.util.Objects;
 
 public class LicensePlateDto {
-    private final String plateNumber;
-    private final String issuingCountry;
+    private String plateNumber;
+    private String issuingCountry;
 
-    public LicensePlateDto(String plateNumber, String issuingCountry){
+    public LicensePlateDto() {
+    }
+
+    public LicensePlateDto(String plateNumber, String issuingCountry) {
 
         this.plateNumber = plateNumber;
         this.issuingCountry = issuingCountry;
