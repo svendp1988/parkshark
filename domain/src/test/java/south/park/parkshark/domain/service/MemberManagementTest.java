@@ -27,10 +27,11 @@ class MemberManagementTest {
     private PersonRepository personRepository = Mockito.mock(PersonRepository.class);
     private LicensePlateRepository licensePlateRepository = Mockito.mock(LicensePlateRepository.class);
     private ContactDataRepository contactDataRepository = Mockito.mock(ContactDataRepository.class);
+    private ValidationService validationService = new ValidationService(memberMapper);
 
     public MemberManagementTest() {
         this.memberManagement = new MemberManagement(memberRepository, addressRepository, personRepository,
-                licensePlateRepository, contactDataRepository , memberMapper);
+                licensePlateRepository, contactDataRepository , memberMapper, validationService);
     }
 
     @Test
