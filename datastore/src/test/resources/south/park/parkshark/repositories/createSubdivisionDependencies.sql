@@ -1,0 +1,1 @@
+INSERT INTO divisions (name, original_name, director_full_name) VALUES ('name', 'originalName', 'directorFullName');

@@ -30,12 +30,13 @@ public class Member {
     public Member() {
     }
 
+    public Member(Person person, LocalDate registrationDate, List<LicensePlate> licensePlates) {
+        this(0, person, MembershipLevels.BRONZE, registrationDate, licensePlates);
+    }
+
     public Member(Person person, MembershipLevels membershipLevel, LocalDate registrationDate,
                   List<LicensePlate> licensePlates){
-        this.person = person;
-        this.membershipLevel = membershipLevel;
-        this.registrationDate = registrationDate;
-        this.licensePlates = licensePlates;
+        this(0, person, membershipLevel, registrationDate, licensePlates);
     }
 
     public Member(long memberId, Person person, MembershipLevels membershipLevel, LocalDate registrationDate,
