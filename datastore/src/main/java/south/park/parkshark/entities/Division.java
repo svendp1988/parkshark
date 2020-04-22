@@ -1,9 +1,12 @@
 package south.park.parkshark.entities;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name ="divisions")
+@Table(name = "divisions")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Division {
     @Id
     @Column(name = "division_id")
@@ -18,15 +21,22 @@ public class Division {
 
     @Column(name = "director_full_name")
     private String directorName;
+    @Nullable
+    @Column(name = "parent_division_id")
+    private long parentId;
 
     public Division() {
     }
 
-
-    public Division(String name, String originalName, String directorName) {
+    public Division(String name, String originalName, String directorName, long parentId) {
         this.name = name;
         this.originalName = originalName;
         this.directorName = directorName;
+        this.parentId = parentId;
+    }
+
+    public Division(String name, String originalName, String directorName) {
+        this(name, originalName, directorName, 0);
     }
 
     public long getId() {
@@ -45,6 +55,10 @@ public class Division {
         return directorName;
     }
 
+    public long getParentId() {
+        return parentId;
+    }
+
     @Override
     public String toString() {
         return "Division{" +
@@ -52,6 +66,7 @@ public class Division {
                 ", name='" + name + '\'' +
                 ", originalName='" + originalName + '\'' +
                 ", directorName='" + directorName + '\'' +
+                ", parentId=" + parentId +
                 '}';
     }
 }
