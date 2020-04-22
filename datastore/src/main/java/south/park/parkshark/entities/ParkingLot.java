@@ -28,11 +28,11 @@ public class ParkingLot {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "division_id")
     private Division division;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "parking_category_id")
     private ParkingCategory parkingCategory;
 

@@ -41,6 +41,16 @@ public class Person {
         this.lastName = lastName;
         this.contactData = contactData;
     }
+    public Person(Address address, String firstName, String lastName, List<ContactData> contactData){
+        this.address = address;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactData = contactData;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public long getPersonId() {
         return personId;

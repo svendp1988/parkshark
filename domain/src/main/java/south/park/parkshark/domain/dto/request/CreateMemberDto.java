@@ -21,6 +21,11 @@ public class CreateMemberDto {
     }
 
     public CreateMemberDto(String firstName, String lastName, String streetName, String streetNumber,
+                           String postalCode, String postalLabel, List<ContactDataDto> contactData, LicensePlateDto licensePlate) {
+        this(firstName, lastName, streetName, streetNumber, postalCode, postalLabel, contactData, MembershipLevels.BRONZE, licensePlate);
+    }
+
+    public CreateMemberDto(String firstName, String lastName, String streetName, String streetNumber,
                            String postalCode, String postalLabel, List<ContactDataDto> contactData,
                            MembershipLevels membershipLevel, LicensePlateDto licensePlate) {
         this.firstName = firstName;

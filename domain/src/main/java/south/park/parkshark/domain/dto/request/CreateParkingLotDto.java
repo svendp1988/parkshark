@@ -60,6 +60,22 @@ public class CreateParkingLotDto {
         return parkingCategory;
     }
 
+    public void setContactPerson(Person contactPerson) {
+        this.contactPerson = contactPerson;
+    }
+
+    public void setParkingCategory(ParkingCategory parkingCategory) {
+        this.parkingCategory = parkingCategory;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
     @Override
     public String toString() {
         return "CreateParkingLotDto{" +
