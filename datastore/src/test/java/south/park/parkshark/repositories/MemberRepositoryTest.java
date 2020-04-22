@@ -76,4 +76,12 @@ public class MemberRepositoryTest {
 
     }
 
+    @Test
+    @Sql({"defaultAddress.sql", "getAllMembers.sql"})
+    public void getAllMembers() {
+        Iterable<Member> actualList = memberRepository.findAll();
+        Member actualMemberById = memberRepository.findById(2L).get();
+        assertThat(actualList).hasSize(4);
+        assertThat(actualList).contains(actualMemberById);
+    }
 }
