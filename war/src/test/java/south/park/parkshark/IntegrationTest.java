@@ -101,7 +101,7 @@ class IntegrationTest {
                         .andReturn()
                         .getResponse()
                         .getContentAsString();
-        String expected = "[[{\"memberId\":1,\"firstName\":\"HP\",\"lastName\":\"Samsing\",\"streetName\":\"null\",\"streetNumber\":\"null\",\"postalCode\":\"null\",\"postalLabel\":\"BE\",\"contactData\":[{\"type\":\"MOBILEPHONE\",\"data\":\"0484 78 78 78\"},{\"type\":\"EMAIL\",\"data\":\"djflksdjkl@ehb.be\"}],\"membershipLevel\":\"GOLD\",\"licensePlate\":[{\"plateNumber\":\"123\",\"issuingCountry\":\"BE\"}],\"registrationDate\":\"2020-04-22\"}]";
+        String expected = "[{\"memberId\":1,\"firstName\":\"HP\",\"lastName\":\"Samsing\",\"streetName\":\"null\",\"streetNumber\":\"null\",\"postalCode\":\"null\",\"postalLabel\":\"BE\",\"contactData\":[{\"type\":\"MOBILEPHONE\",\"data\":\"0484 78 78 78\"},{\"type\":\"EMAIL\",\"data\":\"djflksdjkl@ehb.be\"}],\"membershipLevel\":\"GOLD\",\"licensePlate\":[{\"plateNumber\":\"123\",\"issuingCountry\":\"BE\"}],\"registrationDate\":\"2020-04-22\"}]";
         JSONAssert.assertEquals(expected, actualResult, true);
     }
 }
