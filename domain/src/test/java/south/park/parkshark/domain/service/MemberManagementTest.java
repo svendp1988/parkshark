@@ -24,12 +24,14 @@ import static org.mockito.Mockito.when;
 class MemberManagementTest {
     private MemberManagement memberManagement;
     private MemberMapper memberMapper = new MemberMapper();
+    private ValidationService validationService = new ValidationService(memberMapper);
 
     private MemberRepository memberRepository = Mockito.mock(MemberRepository.class);
     private AddressRepository addressRepository = Mockito.mock(AddressRepository.class);
     private PersonRepository personRepository = Mockito.mock(PersonRepository.class);
     private LicensePlateRepository licensePlateRepository = Mockito.mock(LicensePlateRepository.class);
     private ContactDataRepository contactDataRepository = Mockito.mock(ContactDataRepository.class);
+
 
     public MemberManagementTest() {
         this.memberManagement = new MemberManagement(memberRepository, addressRepository, personRepository,
