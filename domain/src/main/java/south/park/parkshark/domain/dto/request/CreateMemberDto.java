@@ -2,7 +2,7 @@ package south.park.parkshark.domain.dto.request;
 
 import south.park.parkshark.domain.dto.shared.ContactDataDto;
 import south.park.parkshark.domain.dto.shared.LicensePlateDto;
-import south.park.parkshark.entities.MembershipLevels;
+import south.park.parkshark.datastore.entities.MembershipLevels;
 
 import java.util.List;
 

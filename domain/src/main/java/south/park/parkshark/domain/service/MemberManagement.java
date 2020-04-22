@@ -3,11 +3,11 @@ package south.park.parkshark.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import south.park.parkshark.datastore.entities.*;
+import south.park.parkshark.datastore.repositories.*;
 import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.response.MemberDto;
-import south.park.parkshark.entities.*;
-import south.park.parkshark.mappers.MemberMapper;
-import south.park.parkshark.repositories.*;
+import south.park.parkshark.domain.mappers.MemberMapper;
 
 import java.time.LocalDate;
 import java.util.List;

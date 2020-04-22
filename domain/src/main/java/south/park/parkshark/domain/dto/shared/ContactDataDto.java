@@ -1,7 +1,7 @@
 package south.park.parkshark.domain.dto.shared;
 
-import south.park.parkshark.entities.ContactType;
-import south.park.parkshark.entities.ContactTypes;
+import south.park.parkshark.datastore.entities.ContactType;
+import south.park.parkshark.datastore.entities.ContactTypes;
 
 import java.util.Objects;
 

@@ -1,28 +1,45 @@
-package south.park.parkshark.domain.dto.request;
+package south.park.parkshark.datastore.entities;
 
-import south.park.parkshark.datastore.entities.Address;
-import south.park.parkshark.datastore.entities.Division;
-import south.park.parkshark.datastore.entities.ParkingCategory;
-import south.park.parkshark.datastore.entities.Person;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "parking_lots")
+public class ParkingLot {
 
-public class CreateParkingLotDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "parking_lot_id")
+    private long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "max_capacity")
     private int maxCapacity;
 
+    @Column(name = "price_per_hour")
     private long pricePerHour;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
     private Person contactPerson;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "division_id")
     private Division division;
 
+    @ManyToOne
+    @JoinColumn(name = "parking_category_id")
     private ParkingCategory parkingCategory;
 
-    public CreateParkingLotDto(String name, int maxCapacity, long pricePerHour, Person contactPerson, Address address, Division division, ParkingCategory parkingCategory) {
+    public ParkingLot() {
+    }
+
+    public ParkingLot(String name, int maxCapacity, long pricePerHour, Person contactPerson, Address address, Division division, ParkingCategory parkingCategory) {
         this.name = name;
         this.maxCapacity = maxCapacity;
         this.pricePerHour = pricePerHour;
@@ -30,6 +47,10 @@ public class CreateParkingLotDto {
         this.address = address;
         this.division = division;
         this.parkingCategory = parkingCategory;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -60,28 +81,13 @@ public class CreateParkingLotDto {
         return parkingCategory;
     }
 
-    public void setContactPerson(Person contactPerson) {
-        this.contactPerson = contactPerson;
-    }
-
-    public void setParkingCategory(ParkingCategory parkingCategory) {
-        this.parkingCategory = parkingCategory;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public void setDivision(Division division) {
-        this.division = division;
-    }
-
     @Override
     public String toString() {
-        return "CreateParkingLotDto{" +
-                "name='" + name + '\'' +
+        return "ParkingLot{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", maxCapacity='" + maxCapacity + '\'' +
-                ", pricePerHour=" + pricePerHour +
+                ", pricePerHour='" + pricePerHour + '\'' +
                 ", contactPerson=" + contactPerson +
                 ", address=" + address +
                 ", division=" + division +
