@@ -66,5 +66,14 @@ public class MemberRepositoryTest {
         Member actualMember = memberRepository.findById(1l).get();
         assertThat(actualMember.getMembershipLevel()).isEqualTo(MembershipLevels.BRONZE);
     }
+    @Test
+    @Sql({"defaultAddress.sql","getAllMembers.sql"})
+    public void getAllMembersFromH2() {
+        Iterable<Member> actualList = memberRepository.findAll();
+        Member actualMemberById = memberRepository.findById(2L).get();
+        assertThat(actualList).hasSize(4);
+        assertThat(actualList).contains(actualMemberById);
+
+    }
 
 }
