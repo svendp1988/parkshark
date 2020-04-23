@@ -46,6 +46,7 @@ public class ParkingLotService {
         createParkingLotDto.setContactPerson(personRepository.save(contactPerson));
         createParkingLotDto.setDivision(divisionRepository.save(createParkingLotDto.getDivision()));
         createParkingLotDto.setParkingCategory(parkingCategoryRepository.save(createParkingLotDto.getParkingCategory()));
+
         ParkingLot parkingLot = parkingLotRepository.save(parkingLotMapper.toParkingLot(createParkingLotDto));
         return parkingLotMapper.toParkingLotDto(parkingLot);
     }

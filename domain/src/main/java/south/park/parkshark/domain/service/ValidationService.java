@@ -28,12 +28,6 @@ public class ValidationService {
         this.memberMapper = memberMapper;
     }
 
-    public void assertAtLeastOnePhoneNumberIsGiven(CreateMemberDto input) {
-
-      assertAtLeastOnePhoneNumberIsGiven(input.getContactData().stream()
-              .map(cd -> memberMapper.toContactData(cd, 0)).collect(Collectors.toList()));
-    }
-
     public void assertAtLeastOnePhoneNumberIsGiven(List<ContactData> input) {
         if(input.stream()
                 .filter(cd -> cd.getContactType() == ContactTypes.FIXEDPHONE || cd.getContactType() == ContactTypes.MOBILEPHONE)
@@ -42,18 +36,14 @@ public class ValidationService {
         }
     }
 
+    public void assertAtLeastOnePhoneNumberIsGiven(CreateMemberDto input) {
+      assertAtLeastOnePhoneNumberIsGiven(input.getContactData().stream()
+              .map(cd -> memberMapper.toContactData(cd, 0)).collect(Collectors.toList()));
+    }
+
     public void assertAtLeastOnePhoneNumberIsGiven(CreateParkingLotDto input) {
        assertAtLeastOnePhoneNumberIsGiven(input.getContactPerson().getContactDataList());
         }
-
-    public void assertAtLeastOneEmailExistsAndAllAreValid(CreateMemberDto input) {
-        assertAtLeastOneEmailExistsAndAllAreValid(input.getContactData().stream()
-                .map(cd-> memberMapper.toContactData(cd, 0)).collect(Collectors.toList()));
-    }
-    public void assertAtLeastOneEmailExistsAndAllAreValid(CreateParkingLotDto input) {
-        assertAtLeastOneEmailExistsAndAllAreValid(input.getContactPerson().getContactDataList());
-
-    }
 
     public void assertAtLeastOneEmailExistsAndAllAreValid(List<ContactData> input) {
         List<ContactData> emails = input.stream().filter(cd -> cd.getContactType() == ContactTypes.EMAIL).collect(Collectors.toUnmodifiableList());
@@ -61,8 +51,15 @@ public class ValidationService {
         if(emails.size() == 0) throw new LackingEmailAddressException();
         assertEmailsHaveValidForm(emails);
     }
+    public void assertAtLeastOneEmailExistsAndAllAreValid(CreateMemberDto input) {
+        assertAtLeastOneEmailExistsAndAllAreValid(input.getContactData().stream()
+                .map(cd-> memberMapper.toContactData(cd, 0)).collect(Collectors.toList()));
+    }
 
+    public void assertAtLeastOneEmailExistsAndAllAreValid(CreateParkingLotDto input) {
+        assertAtLeastOneEmailExistsAndAllAreValid(input.getContactPerson().getContactDataList());
 
+    }
 
     private void assertEmailsHaveValidForm(List<ContactData> emails) {
         String emailMatch = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
