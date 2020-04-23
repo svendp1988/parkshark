@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import south.park.parkshark.domain.dto.request.CreateMemberDto;
 import south.park.parkshark.domain.dto.request.CreateParkingLotDto;
-import south.park.parkshark.domain.dto.response.ParkingLotDto;
-import south.park.parkshark.domain.dto.shared.ContactDataDto;
 import south.park.parkshark.domain.exceptions.InvalidEmailException;
 import south.park.parkshark.domain.exceptions.LackingEmailAddressException;
 import south.park.parkshark.domain.exceptions.LackingPhoneNumberException;
-import south.park.parkshark.entities.ContactData;
-import south.park.parkshark.entities.ContactTypes;
-import south.park.parkshark.mappers.MemberMapper;
+import south.park.parkshark.datastore.entities.ContactData;
+import south.park.parkshark.datastore.entities.ContactTypes;
+import south.park.parkshark.domain.mappers.MemberMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

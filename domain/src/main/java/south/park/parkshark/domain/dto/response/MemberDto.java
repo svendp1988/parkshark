@@ -2,7 +2,7 @@ package south.park.parkshark.domain.dto.response;
 
 import south.park.parkshark.domain.dto.shared.ContactDataDto;
 import south.park.parkshark.domain.dto.shared.LicensePlateDto;
-import south.park.parkshark.entities.MembershipLevels;
+import south.park.parkshark.datastore.entities.MembershipLevels;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -139,49 +139,5 @@ public class MemberDto {
                 ", licensePlate=" + licensePlate +
                 ", registrationDate=" + registrationDate +
                 '}';
-    }
-
-    public long getMemberId() {
-        return memberId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public String getPostalLabel() {
-        return postalLabel;
-    }
-
-    public List<ContactDataDto> getContactData() {
-        return contactData;
-    }
-
-    public MembershipLevels getMembershipLevel() {
-        return membershipLevel;
-    }
-
-    public List<LicensePlateDto> getLicensePlate() {
-        return licensePlate;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
     }
 }
