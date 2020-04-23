@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import south.park.parkshark.domain.dto.request.CreateDivisionDto;
 import south.park.parkshark.domain.dto.response.DivisionDto;
-import south.park.parkshark.entities.Division;
-import south.park.parkshark.mappers.DivisionMapper;
-import south.park.parkshark.repositories.DivisionRepository;
+import south.park.parkshark.datastore.entities.Division;
+import south.park.parkshark.domain.mappers.DivisionMapper;
+import south.park.parkshark.datastore.repositories.DivisionRepository;
 
 import java.util.Collection;
 import java.util.List;

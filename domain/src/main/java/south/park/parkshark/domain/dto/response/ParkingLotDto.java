@@ -1,9 +1,9 @@
 package south.park.parkshark.domain.dto.response;
 
-import south.park.parkshark.entities.Address;
-import south.park.parkshark.entities.Division;
-import south.park.parkshark.entities.ParkingCategory;
-import south.park.parkshark.entities.Person;
+import south.park.parkshark.datastore.entities.Address;
+import south.park.parkshark.datastore.entities.Division;
+import south.park.parkshark.datastore.entities.ParkingCategory;
+import south.park.parkshark.datastore.entities.Person;
 
 import java.util.Objects;
 
