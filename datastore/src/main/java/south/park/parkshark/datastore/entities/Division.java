@@ -22,12 +22,12 @@ public class Division {
     private String directorName;
     @Nullable
     @Column(name = "parent_division_id")
-    private long parentId;
+    private Long parentId;
 
     public Division() {
     }
 
-    public Division(String name, String originalName, String directorName, long parentId) {
+    public Division(String name, String originalName, String directorName, Long parentId) {
         this.name = name;
         this.originalName = originalName;
         this.directorName = directorName;
@@ -43,7 +43,7 @@ public class Division {
     }
 
     public Division(String name, String originalName, String directorName) {
-        this(name, originalName, directorName, 0);
+        this(name, originalName, directorName, null);
     }
 
     public long getId() {
@@ -62,7 +62,7 @@ public class Division {
         return directorName;
     }
 
-    public long getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
