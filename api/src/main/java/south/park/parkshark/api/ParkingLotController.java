@@ -6,6 +6,8 @@ import south.park.parkshark.domain.dto.request.CreateParkingLotDto;
 import south.park.parkshark.domain.dto.response.ParkingLotDto;
 import south.park.parkshark.domain.service.ParkingLotService;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping(path = "/parkinglot")
 public class ParkingLotController {
@@ -20,6 +22,12 @@ public class ParkingLotController {
     @ResponseStatus(HttpStatus.CREATED)
     public ParkingLotDto createParkingLot(@RequestBody CreateParkingLotDto createParkingLotDto) {
         return parkingLotService.createParkingLot(createParkingLotDto);
+    }
+
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<ParkingLotDto> getAllParkingLots(){
+        return parkingLotService.getAllParkingLots();
     }
 
 
