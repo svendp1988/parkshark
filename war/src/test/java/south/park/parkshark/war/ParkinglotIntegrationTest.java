@@ -69,8 +69,8 @@ class ParkinglotIntegrationTest {
                 .header("Authorization", "Basic " + Base64Utils
                         .encodeToString(("manager" + ":" + "manager").getBytes(StandardCharsets.UTF_8)))
                 .exchange()
-                .expectBody(ParkingLotDto.class)
-                .isEqualTo(parkinglotDtoSameData);
+                .expectStatus()
+                .isCreated();
     }
 
     @WithMockUser
