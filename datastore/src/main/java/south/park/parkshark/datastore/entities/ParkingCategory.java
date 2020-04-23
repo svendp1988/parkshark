@@ -16,6 +16,11 @@ public class ParkingCategory {
     public ParkingCategory() {
    }
 
+    public ParkingCategory(long id, String name) {
+        this.id = id;
+        this.name =name;
+    }
+
     public ParkingCategory(String name) {
         this.name = name;
     }

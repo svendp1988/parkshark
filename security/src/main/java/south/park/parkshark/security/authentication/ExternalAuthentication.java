@@ -1,7 +1,7 @@
 package south.park.parkshark.security.authentication;
 
-import com.eurder.infrastructure.eurderRoles.EurderRole;
 import org.springframework.stereotype.Component;
+import south.park.parkshark.security.roles.ParksharkRole;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +11,7 @@ public class ExternalAuthentication {
 
     private String username;
     private String password;
-    private List<EurderRole> roles;
+    private List<ParksharkRole> roles;
 
     public static ExternalAuthentication externalAuthentication() {
         return new ExternalAuthentication();
@@ -27,7 +27,7 @@ public class ExternalAuthentication {
         return this;
     }
 
-    public ExternalAuthentication withRoles(List<EurderRole> roles) {
+    public ExternalAuthentication withRoles(List<ParksharkRole> roles) {
         this.roles = roles;
         return this;
     }
@@ -40,7 +40,7 @@ public class ExternalAuthentication {
         return password;
     }
 
-    public List<EurderRole> getRoles() {
+    public List<ParksharkRole> getRoles() {
         return roles;
     }
 

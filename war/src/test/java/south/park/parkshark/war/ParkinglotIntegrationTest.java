@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.util.Base64Utils;
 import reactor.core.publisher.Mono;
 import south.park.parkshark.WarTestApplication;
 import south.park.parkshark.datastore.entities.*;
@@ -17,6 +18,7 @@ import south.park.parkshark.domain.dto.request.CreateParkingLotDto;
 import south.park.parkshark.domain.dto.response.ParkingLotDto;
 import south.park.parkshark.domain.mappers.ParkingLotMapper;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockUser;
@@ -32,37 +34,32 @@ class ParkinglotIntegrationTest {
     WebTestClient webTestClient;
     @Autowired
     ParkingLotMapper parkingLotMapper;
-    @Autowired
-    ApplicationContext context;
-
-    @BeforeEach
-    public void setup() {
-        webTestClient = WebTestClient
-                .bindToApplicationContext(this.context)
-                // add Spring Security test Support
-                .apply(springSecurity())
-//                .configureClient()
-//                .filter(basicAuthentication())
-                .build();
-    }
 
     @Disabled
     @Test
     void integration() {
         Address personAddress = new Address("kerkstraat", "2", "3560", "lummen");
+        Address personAddressSameData = new Address(1,"kerkstraat", "2", "3560", "lummen");
+
         Person contactPerson = new Person(personAddress, "dries", "bodaer", List.of( new ContactData(1, ContactTypes.EMAIL, "test@gmail.com"), new ContactData(1, ContactTypes.FIXEDPHONE, "1350313103")));
+        Person contactPersonSameData = new Person( 1L,personAddressSameData, "dries", "bodaer", List.of( new ContactData(1L, 1, ContactTypes.EMAIL, "test@gmail.com"), new ContactData(2L, 1, ContactTypes.FIXEDPHONE, "1350313103")));
         Address parkinglotAddress = new Address("cherchstraat", "2", "3560", "lummen");
+        Address parkinglotAddressSameData = new Address(2,"cherchstraat", "2", "3560", "lummen");
         Division division = new Division("dev1", "division", "haroldB");
+        Division divisionSameData = new Division(1L, "dev1", "division","haroldB", 1L);
         ParkingCategory parkingCategory = new ParkingCategory("underground");
+        ParkingCategory parkingCategorySameData = new ParkingCategory(1 , "underground");
         CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto("djamalparking", 300, 2, contactPerson, parkinglotAddress, division, parkingCategory);
         ParkingLot parkingLot = parkingLotMapper.toParkingLot(createParkingLotDto);
         ParkingLotDto parkingLotDto = parkingLotMapper.toParkingLotDto(parkingLot);
+        ParkingLotDto parkinglotDtoSameData = new ParkingLotDto(1,"djamalparking", 300, 2, contactPersonSameData, parkinglotAddressSameData, divisionSameData, parkingCategorySameData);
 
-        webTestClient.mutateWith(mockUser().roles("ADMIN"))
-                .post().contentType(MediaType.APPLICATION_JSON)
+        webTestClient.post().uri("/parkinglot").contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just( createParkingLotDto), CreateParkingLotDto.class)
+                .header("Authorization", "Basic " + Base64Utils
+                        .encodeToString(("manager" + ":" + "manager").getBytes(StandardCharsets.UTF_8)))
                 .exchange()
                 .expectBody(ParkingLotDto.class)
-                .isEqualTo(parkingLotDto);
+                .isEqualTo(parkinglotDtoSameData);
     }
 }

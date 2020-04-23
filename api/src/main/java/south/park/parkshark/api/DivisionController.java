@@ -2,6 +2,7 @@ package south.park.parkshark.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import south.park.parkshark.domain.dto.request.CreateDivisionDto;
 import south.park.parkshark.domain.dto.response.DivisionDto;
@@ -29,13 +30,12 @@ public class DivisionController {
         return divisionService.createDivision(createDivisionDto);
     }
 
+    @PreAuthorize("hasAuthority('MANAGER_ONLY')")
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public Collection<DivisionDto> getAllDivisions() {
         return divisionService.getAllDivisions();
     }
-
-
 
 
 }

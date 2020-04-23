@@ -34,6 +34,14 @@ public class Division {
         this.parentId = parentId;
     }
 
+    public Division(long id, String name, String originalName, String directorName, long parentId) {
+        this.id = id;
+        this.name = name;
+        this.originalName = originalName;
+        this.directorName = directorName;
+        this.parentId = parentId;
+    }
+
     public Division(String name, String originalName, String directorName) {
         this(name, originalName, directorName, 0);
     }

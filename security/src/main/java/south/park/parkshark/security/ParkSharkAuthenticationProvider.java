@@ -1,8 +1,5 @@
 package south.park.parkshark.security;
 
-import com.eurder.infrastructure.authentication.ExternalAuthentication;
-import com.eurder.infrastructure.authentication.FakeAuthenticationService;
-import com.eurder.infrastructure.eurderRoles.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,6 +9,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import south.park.parkshark.security.authentication.ExternalAuthentication;
+import south.park.parkshark.security.authentication.FakeAuthenticationService;
+import south.park.parkshark.security.roles.Feature;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,11 +37,12 @@ public class ParkSharkAuthenticationProvider implements AuthenticationProvider {
         } else {
             return new UsernamePasswordAuthenticationToken(username, password, rolesToGrantedAuthorities(Feature.getFeaturesForRoles(user.getRoles())));
         }
+
     }
 
     private Collection<? extends GrantedAuthority> rolesToGrantedAuthorities(List<Feature> roles) {
         return roles.stream()
-                .map(eurderRole -> eurderRole.name())
+                .map(Enum::name)
                 .map(role -> new SimpleGrantedAuthority(role))
                 .collect(Collectors.toList());
     }

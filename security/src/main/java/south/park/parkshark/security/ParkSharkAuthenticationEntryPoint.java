@@ -1,5 +1,6 @@
 package south.park.parkshark.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -8,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class ParkSharkuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
+public class ParkSharkAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
-    public static final String NAME_OF_REALM = "eurderRealm";
+    public static final String NAME_OF_REALM = "parksharkRealm";
 
-    public ParkSharkuthenticationEntryPoint() {
+    @Autowired
+    public ParkSharkAuthenticationEntryPoint() {
         setRealmName(NAME_OF_REALM);
     }
 

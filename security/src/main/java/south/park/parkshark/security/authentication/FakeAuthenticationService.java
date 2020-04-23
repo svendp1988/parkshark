@@ -1,8 +1,8 @@
 package south.park.parkshark.security.authentication;
 
-import com.eurder.infrastructure.eurderRoles.EurderRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import south.park.parkshark.security.roles.ParksharkRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 @Service
 public class FakeAuthenticationService {
 
-    private final List<ExternalAuthentication> externalAuthentications;
+    private List<ExternalAuthentication> externalAuthentications;
 
     @Autowired
     public FakeAuthenticationService(List<ExternalAuthentication> externalAuthentications) {
         this.externalAuthentications = new ArrayList<>();
-        this.externalAuthentications.add(ExternalAuthentication.externalAuthentication().withUsername("customer").withPassword("customer").withRoles(List.of(EurderRole.CUSTOMER)));
-        this.externalAuthentications.add(ExternalAuthentication.externalAuthentication().withUsername("admin").withPassword("admin").withRoles(List.of(EurderRole.ADMIN)));
+        this.externalAuthentications.add(ExternalAuthentication.externalAuthentication().withUsername("member").withPassword("member").withRoles(List.of(ParksharkRole.MEMBER)));
+        this.externalAuthentications.add(ExternalAuthentication.externalAuthentication().withUsername("manager").withPassword("manager").withRoles(List.of(ParksharkRole.MANAGER)));
     }
 
     public ExternalAuthentication getUser(String username, String password) {
@@ -28,7 +28,7 @@ public class FakeAuthenticationService {
                 .orElse(null);
     }
 
-    public void addUser(String name, String password, List<EurderRole> roles) {
+    public void addUser(String name, String password, List<ParksharkRole> roles) {
         if (externalAuthentications.stream().map(ExternalAuthentication::getUsername).collect(Collectors.toList()).contains(name)) {
             throw new IllegalArgumentException("username already exists");
         }
