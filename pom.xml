@@ -59,10 +59,6 @@
                 <version>42.2.12</version>
                 <scope>runtime</scope>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -79,25 +75,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--        <groupId>io.springfox</groupId>-->
-        <!--        <artifactId>springfox-swagger2</artifactId>-->
-        <!--        <version>2.9.2</version>-->
-        <!--    </dependency>-->
-        <!--    <dependency>-->
-        <!--        <groupId>io.springfox</groupId>-->
-        <!--        <artifactId>springfox-swagger-ui</artifactId>-->
-        <!--        <version>2.9.2</version>-->
-        <!--    </dependency>-->
 
-        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -120,6 +104,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
@@ -135,24 +120,6 @@
 
     <build>
         <plugins>
-            <!--    change by Harold Brinkhof:
-                    for some reason the spring-boot-maven-plugin creates jars
-                    that don't expose the SpringBootApplication class
-                    file correctly to our test classes, thus breaking testCompile phase.
-                    switching to maven-jar-plugin solves this
-                    -->
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
-            -->
-            <!--
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
