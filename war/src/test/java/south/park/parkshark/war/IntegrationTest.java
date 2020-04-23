@@ -103,4 +103,26 @@ class IntegrationTest {
         String expected = "[{\"memberId\":1,\"firstName\":\"HP\",\"lastName\":\"Samsing\",\"streetName\":\"null\",\"streetNumber\":\"null\",\"postalCode\":\"null\",\"postalLabel\":\"BE\",\"contactData\":[{\"type\":\"MOBILEPHONE\",\"data\":\"0484 78 78 78\"},{\"type\":\"EMAIL\",\"data\":\"djflksdjkl@ehb.be\"}],\"membershipLevel\":\"GOLD\",\"licensePlate\":[{\"plateNumber\":\"123\",\"issuingCountry\":\"BE\"}],\"registrationDate\":\"" + today + "\"}]";
         JSONAssert.assertEquals(expected, actualResult, true);
     }
+    @WithMockUser
+    @Test
+    void mockMvc_test_selectMemberShipLevel() throws Exception {
+        List<ContactDataDto> contactDataDtos = List.of(
+                new ContactDataDto(ContactTypes.MOBILEPHONE,"0484 78 78 78"),
+                new ContactDataDto(ContactTypes.EMAIL,"djflksdjkl@ehb.be")
+        );
+        LicensePlateDto licensePlateDto = new LicensePlateDto("123","BE");
+        CreateMemberDto createMemberDto1 = new CreateMemberDto("HP","Samsing","null","null","null","BE",contactDataDtos, licensePlateDto);
+        memberManagement.registerMember(createMemberDto1);
+        String actualResult =
+                mockMvc.perform(get("/member")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isOk())
+                        .andReturn()
+                        .getResponse()
+                        .getContentAsString();
+        String today = LocalDate.now().toString();
+        String expected = "[{\"memberId\":1,\"firstName\":\"HP\",\"lastName\":\"Samsing\",\"streetName\":\"null\",\"streetNumber\":\"null\",\"postalCode\":\"null\",\"postalLabel\":\"BE\",\"contactData\":[{\"type\":\"MOBILEPHONE\",\"data\":\"0484 78 78 78\"},{\"type\":\"EMAIL\",\"data\":\"djflksdjkl@ehb.be\"}],\"membershipLevel\":\"BRONZE\",\"licensePlate\":[{\"plateNumber\":\"123\",\"issuingCountry\":\"BE\"}],\"registrationDate\":\"" + today + "\"}]";
+        JSONAssert.assertEquals(expected, actualResult, true);
+    }
 }
